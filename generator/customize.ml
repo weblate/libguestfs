@@ -680,6 +680,39 @@ You can pass the option multiple times, eg.
 I<--selinux-relabel-exclude=/foo> I<--selinux-relabel-exclude=/bar>|};
   };
 
+  { flag_name = "selinux-relabel-at-boot";
+    flag_type = FlagBool false;
+    flag_ml_var = "selinux_relabel_at_boot";
+    flag_shortdesc = "Defer SELinux relabelling until boot";
+    flag_pod_longdesc = {|This advanced option lets you defer
+SELinux relabelling until the first time the guest boots
+after conversion.
+
+The advantage of doing this is that conversion is quicker
+and uses less memory.
+
+The disadvantages are:
+
+=over 4
+
+=item *
+
+The guest will take I<much> longer to boot up and become ready
+the first time it boots.
+
+=item *
+
+The guest will reboot at least once.
+
+=item *
+
+SELinux relabelling problems cannot be detected during conversion.
+
+=back
+
+If in doubt, do not use this option.|};
+  };
+
 ]
 
 let rec generate_customize_cmdline_mli () =
